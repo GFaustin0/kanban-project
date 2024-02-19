@@ -49,7 +49,7 @@ function App() {
         <header className="flex w-auto h-1/4 flex-col gap-8 pt-20  pb-14 pr-10 text-slate-800">
           <div className='flex gap-4'>
             <input type="text" value={boardTitle} ref={inputRef} onChange={onBoardTitleChange} onBlur={onBoardTitleBlur} className='w-0 h-0 absolute' />
-            <span onClick={handleEditBoardTitle} className='text-6xl font-semibold'>{boardTitle}</span>
+            <span onClick={handleEditBoardTitle} className='text-6xl font-semibold h-16 bg-slate-100 rounded-lg px-3'>{boardTitle}</span>
             <button onClick={handleEditBoardTitle}>
               <PencilSimple size={24} />
             </button>
