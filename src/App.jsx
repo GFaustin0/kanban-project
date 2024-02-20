@@ -8,6 +8,11 @@ function App() {
   const [boardTitle, setBoardTitle] = useState('Board Title')
   const inputRef = useRef()
 
+  const [isModalOpen, setModalOpen] = useState(false)
+
+  const [kanbanColum, setKanbanColum] = useState([])
+
+
   function onBoardTitleChange(event) {
     setBoardTitle(event.target.value)
   }
@@ -22,8 +27,33 @@ function App() {
     }
   }
 
+  function handleSaveBoard() {
+    setModalOpen(false)
+    setKanbanColum(['todo', 'in progress',])
+
+  }
+
+  function handleOpenModal() {
+    setModalOpen(true)
+  }
+
+  function handleCancelBoard() {
+    setModalOpen(false)
+    setBoardTitle('')
+  }
+
   return (
-    <div className="flex w-auto h-screen">
+    <div className="flex w-auto h-screen ">
+      {isModalOpen && <div className='h-full w-full absolute bg-slate-900 bg-opacity-75 z-50'>
+        <div className='absolute h-[16rem] w-[30rem] bg-slate-200 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 rounded-2xl p-7 text-center' >
+          <h1 className='font-semibold text-2xl mb-10'>Create a new Board</h1>
+          <input type="text" value={boardTitle} onChange={onBoardTitleChange} name="" id="" placeholder='Board Name' className='rounded-lg bg-slate-300 w-auto font-medium text-xl p-2 px-3' />
+          <div className='flex justify-between items-center px-20 py-9 font-medium '>
+            <button onClick={handleSaveBoard} className='h-auto w-auto bg-slate-300 py-3 px-9 rounded-md hover:bg-green-500 hover:text-slate-50 transition-all ease-in-out delay-75'>Salvar</button>
+            <button onClick={handleCancelBoard} className='h-auto w-auto bg-slate-400 py-3 px-8 rounded-md hover:bg-red-500 hover:text-slate-50 transition-all ease-in-out delay-75'>Cancelar</button>
+          </div>
+        </div>
+      </div>}
       <aside className="flex flex-col w-auto h-full bg-gray-100 pt-20">
         <div className="flex w-80 gap-3 justify-center ">
           <img className="h-16 w-16 rounded-full" src="https://github.com/GFaustin0.png" alt="" />
@@ -61,11 +91,17 @@ function App() {
           </div>
         </header>
 
-        <div className='flex h-3/4 justify-center items-center w-auto gap-4 '>
-          <button className='flex justify-center items-center gap-2 text-slate-800 bg-gray-200 py-4 px-8 rounded-lg shadow-xl hover:bg-indigo-600 hover:text-slate-50 transition-all ease-in-out delay-75 hover:scale-110'>
+        {!kanbanColum.length && <div className='flex items-center justify-center h-3/4'>
+          <button onClick={handleOpenModal} className='flex justify-center items-center gap-2 text-slate-800 bg-gray-200 py-4 px-8 rounded-lg shadow-xl hover:bg-indigo-600 hover:text-slate-50 transition-all ease-in-out delay-75 hover:scale-110'>
             <p className='text-xl font-semibold '>New Board</p>
             <Plus size={20} />
           </button>
+        </div>}
+
+        <div className='flex h-3/4 w-auto gap-4 '>
+          {kanbanColum.map(table => {
+            return <TableKanban tableName={table} />
+          })}
         </div>
 
       </main>
