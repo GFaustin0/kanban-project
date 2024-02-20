@@ -98,11 +98,11 @@ function App() {
           </button>
         </div>}
 
-        <div className='flex h-3/4 w-auto gap-4 '>
+        {kanbanColum.length > 0 && <div className='flex h-3/4 w-auto gap-4 '>
           {kanbanColum.map(table => {
             return <TableKanban tableName={table} />
           })}
-        </div>
+        </div>}
 
       </main>
     </div>
