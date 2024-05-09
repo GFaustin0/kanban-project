@@ -17,7 +17,8 @@ function App() {
     setBoardTitle(event.target.value)
   }
 
-  function handleEditBoardTitle(event) {
+  // eslint-disable-next-line no-unused-vars
+  function handleEditBoardTitle(_event) {
     inputRef.current.focus()
   }
 
@@ -100,7 +101,7 @@ function App() {
 
         {kanbanColum.length > 0 && <div className='flex h-3/4 w-auto gap-4 '>
           {kanbanColum.map(table => {
-            return <TableKanban tableName={table} />
+            return <TableKanban tableName={table} key="" />
           })}
         </div>}
 
